@@ -1,0 +1,19 @@
+An AmigaOS shared library implementation of liblzma from XZ Utils. It is API
+compatible with the earlier lzma.library by Chris Young.
+
+https://tukaani.org/xz/
+
+Installation:
+
+Copy Libs/lzma.library LIBS:
+
+Source code:
+
+The source code for current and older versions is available on github:
+
+https://github.com/salass00/lzma_lib
+
+Changes:
+
+For a list of changes in this and earlier versions see the releasenotes file.
+

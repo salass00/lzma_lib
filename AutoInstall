@@ -1,0 +1,6 @@
+; AutoInstall script for AmiUpdate
+
+CopyStore lzma_lib-xx.xx/Libs/lzma.library SYS:Libs
+
+CopyStore lzma_lib-xx.xx/C/xzdec SYS:C
+CopyStore lzma_lib-xx.xx/C/lzmadec SYS:C

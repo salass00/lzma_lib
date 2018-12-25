@@ -1,0 +1,9 @@
+(welcome)
+(set @default-dest "LIBS:")
+(copylib
+	(prompt "Copying lzma.library")
+	(help @copylib-help)
+	(source "Libs/lzma.library")
+	(dest @default-dest)
+)
+(exit)

@@ -1,0 +1,61 @@
+; Script for generating a release archive
+
+if not exists lzma.library
+echo "Execute *"make all*" first to compile the library."
+quit
+endif
+
+set xzdir xz-5.2.4
+set destdir RAM:mkrelease
+set fullvers `version file lzma.library`
+set numvers `cut "$fullvers" word 2`
+
+delete all force ${destdir}
+makedir all force ${destdir}/lzma_lib-$numvers/Libs
+makedir all force ${destdir}/lzma_lib-$numvers/C
+makedir all force ${destdir}/lzma_lib-$numvers/SDK/Documentation/AutoDocs
+makedir all force ${destdir}/lzma_lib-$numvers/SDK/local/common/include/inline4
+makedir all force ${destdir}/lzma_lib-$numvers/SDK/local/common/include/interfaces
+makedir all force ${destdir}/lzma_lib-$numvers/SDK/local/common/include/proto
+makedir all force ${destdir}/lzma_lib-$numvers/SDK/local/common/include/lzma
+makedir all force ${destdir}/lzma_lib-$numvers/SDK/local/newlib/lib
+
+copy clone Install ${destdir}/lzma_lib-$numvers
+copy clone LICENSE ${destdir}/lzma_lib-$numvers
+copy clone releasenotes ${destdir}/lzma_lib-$numvers
+copy clone lzma.library ${destdir}/lzma_lib-$numvers/Libs
+copy clone xzdec ${destdir}/lzma_lib-$numvers/C
+copy clone lzmadec ${destdir}/lzma_lib-$numvers/C
+copy clone include/inline4/lzma.h ${destdir}/lzma_lib-$numvers/SDK/local/common/include/inline4
+copy clone include/interfaces/lzma.h ${destdir}/lzma_lib-$numvers/SDK/local/common/include/interfaces
+copy clone include/proto/lzma.h ${destdir}/lzma_lib-$numvers/SDK/local/common/include/proto
+copy clone ${xzdir}/liblzma/api/lzma/#?.h ${destdir}/lzma_lib-$numvers/SDK/local/common/include/lzma
+copy clone ${xzdir}/liblzma/api/lzma.h ${destdir}/lzma_lib-$numvers/SDK/local/common/include
+copy clone liblzma.a ${destdir}/lzma_lib-$numvers/SDK/local/newlib/lib
+
+sed "s/lzma_lib-xx.xx/lzma_lib-$numvers/g" AutoInstall > ${destdir}/AutoInstall
+
+echo "Short:        LZMA/XZ (de)compression library"      > ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+echo "Author:       Fredrik Wikstrom"                    >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+echo "Uploader:     Fredrik Wikstrom <fredrik@a500.org>" >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+echo "Type:         util/libs"                           >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+echo "Version:      $numvers"                            >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+echo "Architecture: ppc-amigaos"                         >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+echo ""                                                  >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+type README                                              >> ${destdir}/lzma_lib-$numvers/lzma_lib.readme
+
+copy clone ENV:Sys/def_drawer.info ${destdir}/lzma_lib-$numvers.info
+copy clone ENV:Sys/def_install.info ${destdir}/lzma_lib-$numvers/Install.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lzma_lib-$numvers/lzma_lib.readme.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lzma_lib-$numvers/LICENSE.info
+copy clone ENV:Sys/def_ascii.info ${destdir}/lzma_lib-$numvers/releasenotes.info
+
+changetooltype ${destdir}/lzma_lib-$numvers/Install.info ADD "APPNAME=lzma.library"
+
+delete force RAM:lzma_lib-$numvers.lha
+lha a -x -r RAM:lzma_lib-$numvers.lha ${destdir}/
+
+echo "RAM:lzma_lib.lha created"
+
+copy clone ${destdir}/lzma_lib-$numvers/lzma_lib.readme RAM:
+

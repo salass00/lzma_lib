@@ -1,0 +1,42 @@
+lzma.library 53.1 (7.10.2014) <fwikstrom>
+
+- First version of this library based around liblzma 5.0.7.
+
+- Should be API compatible with Chris Young's library of the same name.
+
+
+lzma.library 53.2 (7.7.2015) <fwikstrom>
+
+- Fixed the name of the memory pool.
+
+
+lzma.library 53.3 (31.7.2015) <fwikstrom>
+
+- Updated liblzma to version 5.2.1.
+
+
+lzma.library 53.4 (31.7.2015) <fwikstrom>
+
+- Liblzma is now built as part of the library build process.
+
+- Added calloc() function replacement in "malloc.c".
+
+
+lzma.library 53.5 (11.8.2015) <fwikstrom>
+
+- Changed malloc()/calloc() to return 64-bit aligned memory.
+
+
+lzma.library 53.6 (12.9.2017) <fwikstrom>
+
+- Updated liblzma to version 5.2.3.
+
+
+lzma.library 53.7 (24.12.2018) <fwikstrom>
+
+- Updated liblzma to version 5.2.4.
+
+- Added lzma_get_progress() function to interface.
+
+- Added building of xzdec and lzmadec commands using the library.
+

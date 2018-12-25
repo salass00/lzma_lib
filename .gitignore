@@ -1,0 +1,9 @@
+# Ignore object and archive files
+*.[oa]
+# Ignore generated executable files
+lzma.library
+lzma.library.debug
+xzdec
+xzdec.debug
+lzmadec
+lzmadec.debug
